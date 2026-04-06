@@ -1,9 +1,7 @@
 class Solution {
     public void nextPermutation(int[] nums) {
-        List<Integer> sorted= new ArrayList<>();
         int index=0;
         for (int i=(nums.length-1);i>0;i--){
-            sorted.add(nums[i]);
             if (nums[i-1]<nums[i]){
                 index=i;
                 break;
@@ -13,23 +11,25 @@ class Solution {
             Arrays.sort(nums);
             return;
         }
-        sorted.sort(null);
-        if (index!=0){
-            int flag=0;
-            int j=0;
-            for (int i=index;i<nums.length;i++){
-                int element=sorted.get(j);
-                j++;
-                if (element>nums[index-1] && flag==0){
-                    int temp=nums[index-1];
-                    nums[index-1]=element;
-                    nums[i]=temp;
-                    flag=1;
-                }else{
-                    nums[i]=element;
-                }
-            }
-            return;
+        int i2=nums.length-1;
+        int i=index;
+        int cnt=0;
+        while (cnt<(nums.length-index)/2 ){
+            int temp=nums[i];
+            nums[i]=nums[i2];
+            nums[i2]=temp;
+            i2--;
+            cnt++;
+            i++;
         }
+        for (int j=index;j<nums.length;j++){
+            if (nums[j]>nums[index-1]){
+                 int tempo=nums[index-1];
+                 nums[index-1]=nums[j];
+                 nums[j]=tempo;
+                 break;
+            }
+        } 
+        return;
     }
 }
