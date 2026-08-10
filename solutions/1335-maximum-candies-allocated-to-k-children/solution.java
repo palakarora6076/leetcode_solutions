@@ -1,4 +1,11 @@
 class Solution {
+    private long count(int n, int[] candies){
+        long kids=0;
+        for (int i=0;i<candies.length;i++){
+            kids+=(candies[i]/n);
+        }
+        return kids;
+    }
     public int maximumCandies(int[] candies, long k) {
         int low=1;
         int high=candies[0];
@@ -16,10 +23,7 @@ class Solution {
         }
         while (low<=high){
             int mid=low+(high-low)/2;
-            long kids=0;
-            for (int i=0;i<candies.length;i++){
-                kids+=(candies[i]/mid);
-            }
+            long kids=count(mid,candies);
             if (kids<k){
                 high=mid-1;
             }else{
